@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Virtual Zen Garden</title>
+    <title>Relaxing Virtual Zen Garden</title>
     <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
     <style>
         body { margin: 0; }
@@ -11,61 +11,88 @@
 <body>
     <a-scene>
         <!-- Sky -->
-        <a-sky color="#87CEEB"></a-sky>
+        <a-sky color="#E0FFFF"></a-sky>
 
-        <!-- Ground (Zen Garden Base) with Sand Pattern -->
-        <a-plane id="garden-floor" position="0 0 0" rotation="-90 0 0" width="20" height="20" color="#F5F5DC" shadow="cast: true">
-            <!-- Optional: Apply sand texture -->
-            <!-- <a-plane position="0 0 0" rotation="-90 0 0" width="20" height="20" src="#sandTexture"></a-plane> -->
-        </a-plane>
+        <!-- Ground (Zen Garden Base) with Sand Texture -->
+        <a-plane id="garden-floor" position="0 0 0" rotation="-90 0 0" width="20" height="20" src="#sandTexture" repeat="true"></a-plane>
 
-        <!-- Interactive Rake Tool -->
-        <a-box id="rake" position="0 0.5 -5" rotation="0 45 0" color="#8B4513" depth="0.2" height="0.2" width="1.5" class="interactive"></a-box>
+        <!-- Stones with Natural Colors and Sizes (Animated and Dissolving) -->
+        <a-sphere id="stone1" position="-4 0.1 -4" radius="0.5" color="#D3D3D3" class="interactive" animation__dissolve="property: material.opacity; to: 0; dur: 2000; easing: easeInOutQuad; startEvents: dissolve"></a-sphere>
+        <a-sphere id="stone2" position="2 0.1 -4" radius="0.5" color="#D3D3D3" class="interactive" animation__dissolve="property: material.opacity; to: 0; dur: 2000; easing: easeInOutQuad; startEvents: dissolve"></a-sphere>
+        <a-sphere id="stone3" position="0 0.1 2" radius="0.5" color="#D3D3D3" class="interactive" animation__dissolve="property: material.opacity; to: 0; dur: 2000; easing: easeInOutQuad; startEvents: dissolve"></a-sphere>
 
-        <!-- Stones -->
-        <a-sphere id="stone1" position="-3 0.1 -3" radius="0.5" color="#8B8B8B" class="interactive"></a-sphere>
-        <a-sphere id="stone2" position="2 0.1 -3" radius="0.5" color="#8B8B8B" class="interactive"></a-sphere>
-        <a-sphere id="stone3" position="0 0.1 2" radius="0.5" color="#8B8B8B" class="interactive"></a-sphere>
+        <!-- Simple Interactive Plants (Animating Growth and Dissolving) -->
+        <a-cylinder id="plant1" position="-4 0.5 -2" radius="0.3" height="1" color="#228B22" class="interactive" animation__grow="property: height; to: 1.5; dur: 2000; easing: easeInOutQuad; startEvents: grow" animation__dissolve="property: material.opacity; to: 0; dur: 2000; easing: easeInOutQuad; startEvents: dissolve"></a-cylinder>
+        <a-cylinder id="plant2" position="4 0.5 -2" radius="0.3" height="1" color="#228B22" class="interactive" animation__grow="property: height; to: 1.5; dur: 2000; easing: easeInOutQuad; startEvents: grow" animation__dissolve="property: material.opacity; to: 0; dur: 2000; easing: easeInOutQuad; startEvents: dissolve"></a-cylinder>
+        <a-cylinder id="plant3" position="0 0.5 4" radius="0.4" height="1.2" color="#228B22" class="interactive" animation__grow="property: height; to: 1.7; dur: 2000; easing: easeInOutQuad; startEvents: grow" animation__dissolve="property: material.opacity; to: 0; dur: 2000; easing: easeInOutQuad; startEvents: dissolve"></a-cylinder>
+        <a-cylinder id="plant4" position="-6 0.5 0" radius="0.3" height="1" color="#228B22" class="interactive" animation__grow="property: height; to: 1.5; dur: 2000; easing: easeInOutQuad; startEvents: grow" animation__dissolve="property: material.opacity; to: 0; dur: 2000; easing: easeInOutQuad; startEvents: dissolve"></a-cylinder>
 
-        <!-- Plants -->
-        <a-cylinder id="plant1" position="-4 0.5 -2" radius="0.3" height="1" color="#228B22" class="interactive"></a-cylinder>
-        <a-cylinder id="plant2" position="4 0.5 -2" radius="0.3" height="1" color="#228B22" class="interactive"></a-cylinder>
+        <!-- Water Feature (Animated) -->
+        <a-cylinder position="2 0.2 2" radius="1.5" height="0.2" color="#1E90FF" material="opacity: 0.6" class="interactive" animation__ripple="property: scale; to: 1.7 1.7 1; dur: 2000; easing: easeInOutQuad; loop: true; dir: alternate" animation__dissolve="property: material.opacity; to: 0; dur: 2000; easing: easeInOutQuad; startEvents: dissolve"></a-cylinder>
+        
+        <!-- Bamboo Fence -->
+        <a-box position="0 0.5 -10" rotation="0 0 0" width="10" height="1" depth="0.1" color="#8B4513"></a-box>
+        <a-box position="0 0.5 10" rotation="0 180 0" width="10" height="1" depth="0.1" color="#8B4513"></a-box>
+        <a-box position="-10 0.5 0" rotation="0 90 0" width="10" height="1" depth="0.1" color="#8B4513"></a-box>
+        <a-box position="10 0.5 0" rotation="0 -90 0" width="10" height="1" depth="0.1" color="#8B4513"></a-box>
+
+        <!-- Footpath -->
+        <a-plane position="0 0.1 -2" rotation="-90 0 0" width="2" height="10" color="#DCDCDC"></a-plane>
+
+        <!-- Zen Rocks (Animated and Dissolving) -->
+        <a-box position="-2 0.5 3" rotation="0 45 0" width="1" height="1" depth="1" color="#A9A9A9" class="interactive" animation__dissolve="property: material.opacity; to: 0; dur: 2000; easing: easeInOutQuad; startEvents: dissolve"></a-box>
+        <a-box position="3 0.5 2" rotation="0 45 0" width="1.2" height="1.2" depth="1.2" color="#A9A9A9" class="interactive" animation__dissolve="property: material.opacity; to: 0; dur: 2000; easing: easeInOutQuad; startEvents: dissolve"></a-box>
+
+        <!-- Meditation Space -->
+        <a-cylinder position="0 0.1 -4" radius="0.8" height="0.1" color="#FFD700" class="interactive" animation__dissolve="property: material.opacity; to: 0; dur: 2000; easing: easeInOutQuad; startEvents: dissolve"></a-cylinder>
+        <a-sphere position="0 0.2 -4" radius="0.2" color="#FFD700" class="interactive" animation__dissolve="property: material.opacity; to: 0; dur: 2000; easing: easeInOutQuad; startEvents: dissolve"></a-sphere>
+
+        <!-- Floating Lanterns -->
+        <a-entity id="lanterns" position="0 2 -4">
+            <a-sphere position="-2 1 0" radius="0.3" color="#FFFFE0" class="interactive" animation__float="property: position; to: -2 2 0; dur: 3000; easing: easeInOutQuad; loop: true; dir: alternate" animation__dissolve="property: material.opacity; to: 0; dur: 2000; easing: easeInOutQuad; startEvents: dissolve"></a-sphere>
+            <a-sphere position="2 1 0" radius="0.3" color="#FFFFE0" class="interactive" animation__float="property: position; to: 2 2 0; dur: 3000; easing: easeInOutQuad; loop: true; dir: alternate" animation__dissolve="property: material.opacity; to: 0; dur: 2000; easing: easeInOutQuad; startEvents: dissolve"></a-sphere>
+        </a-entity>
+
+        <!-- Bridge -->
+        <a-box position="0 0.2 0" rotation="0 0 0" width="3" height="0.2" depth="1" color="#8B4513" class="interactive" animation__dissolve="property: material.opacity; to: 0; dur: 2000; easing: easeInOutQuad; startEvents: dissolve"></a-box>
+
+        <!-- Animated Butterflies -->
+        <a-entity id="butterflies" position="0 2 -2">
+            <a-box position="0 0 0" rotation="0 0 0" width="0.2" height="0.1" depth="0.1" color="#FF4500" class="interactive" animation__fly1="property: position; to: 2 2 -2; dur: 3000; easing: easeInOutQuad; loop: true; dir: alternate" animation__dissolve="property: material.opacity; to: 0; dur: 2000; easing: easeInOutQuad; startEvents: dissolve"></a-box>
+            <a-box position="1 0 0" rotation="0 0 0" width="0.2" height="0.1" depth="0.1" color="#FF6347" class="interactive" animation__fly2="property: position; to: -2 2 -2; dur: 3000; easing: easeInOutQuad; loop: true; dir: alternate" animation__dissolve="property: material.opacity; to: 0; dur: 2000; easing: easeInOutQuad; startEvents: dissolve"></a-box>
+        </a-entity>
+
+        <!-- Gentle Rake Tool -->
+        <a-box id="rake" position="0 0.5 -5" rotation="0 45 0" color="#8B4513" depth="0.2" height="0.2" width="1.5" class="interactive" animation__dissolve="property: material.opacity; to: 0; dur: 2000; easing: easeInOutQuad; startEvents: dissolve"></a-box>
 
         <!-- Camera with Cursor -->
         <a-camera>
-            <a-cursor color="red" fuse="true" fuse-timeout="1000"></a-cursor>
+            <a-cursor color="white" fuse="true" fuse-timeout="1000" raycaster="objects: .interactive"></a-cursor>
         </a-camera>
 
-        <!-- Light -->
-        <a-light type="directional" position="1 4 2" target="#garden-floor"></a-light>
+        <!-- Ambient Light for Soft Illumination -->
+        <a-light type="ambient" color="#FFFFFF" intensity="0.5"></a-light>
+        <a-light type="directional" position="2 10 4" intensity="0"></a-light>
+
+        <!-- Sand Texture -->
+        <a-assets>
+            <img id="sandTexture" src="https://as2.ftcdn.net/v2/jpg/02/81/84/47/1000_F_281844711_sVcjGVwk1ZniFbk2IsJj0dg66wpnjsZS.jpg">
+        </a-assets>
+
+        <!-- Background Music -->
+        <a-sound src="url(https://cdn.glitch.global/845fb22d-0afd-438d-a51e-080dde15f82c/zen-spiritual-yoga-massage-meditation-spa-relax-ambient-music-18403.mp3?v=1721533523852)" autoplay="true" loop="true" volume="0.5"></a-sound>
     </a-scene>
 
     <script>
-        // Rake interaction
+        document.querySelectorAll('.interactive').forEach(function (element) {
+            element.addEventListener('click', function () {
+                element.emit('dissolve');
+            });
+        });
+
+        // Rake interaction (e.g., simulate gentle raking)
         document.querySelector('#rake').addEventListener('click', function () {
-            // Logic for raking sand (e.g., moving the rake across the floor)
             console.log('Rake used to move sand');
-        });
-
-        // Stone interaction
-        document.querySelectorAll('.interactive').forEach(function (element) {
-            element.addEventListener('click', function () {
-                // Logic for placing or interacting with stones
-                console.log('Stone clicked');
-                // Example: change color of the stone
-                element.setAttribute('color', '#FF4500');
-            });
-        });
-
-        // Plant interaction
-        document.querySelectorAll('.interactive').forEach(function (element) {
-            element.addEventListener('click', function () {
-                // Logic for interacting with plants (e.g., growing or moving)
-                console.log('Plant clicked');
-                // Example: increase the height of the plant
-                let currentHeight = parseFloat(element.getAttribute('height'));
-                element.setAttribute('height', currentHeight + 0.5);
-            });
         });
     </script>
 </body>
